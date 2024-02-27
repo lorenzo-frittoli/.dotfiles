@@ -2,21 +2,23 @@
 vim.g.mapleader = " "
 
 -- Ctrl + Backspace to delete word
-vim.api.nvim_set_keymap('i', '<C-H>', '<C-W>', {noremap = true})
+vim.api.nvim_set_keymap('i', '<C-H>', '<C-W>', { noremap = true })
 
 -- Project View
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Swap ; and : to enter command mode
-vim.keymap.set("n", ";", ":")
-vim.keymap.set("n", ":", ";")
+vim.keymap.set({ "n", "v" }, ";", ":", { noremap = true })
+vim.keymap.set({ "n", "v" }, ":", ";", { noremap = true })
 
 -- Use esc to exit terminal mode
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
 
 -- Use J, K to move lines (VS Code alt + up/down)
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<C-j>", ":m +1<CR>")
+vim.keymap.set("n", "<C-k>", ":m -2<CR>")
 
 -- Fix line append cursor position
 vim.keymap.set("n", "J", "mzJ`z")

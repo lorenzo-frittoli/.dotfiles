@@ -6,8 +6,14 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
+
 -- Widget and layout library
 local wibox = require("wibox")
+-- Battery Widget
+local battery_widget = require("battery-widget")
+-- Volume Widget
+local volume_control = require("volume-control")
+
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
@@ -54,6 +60,9 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+
+-- Volume control widget
+volumecfg = volume_control({})
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -220,6 +229,7 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = tasklist_buttons
     }
 
+
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
@@ -235,6 +245,28 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         {             -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            volumecfg.widget,
+            battery_widget {
+                ac = "AC",
+                adapter = "BAT0",
+                ac_prefix = "AC: ",
+                battery_prefix = "Bat: ",
+                percent_colors = {
+                    { 25, "red"   },
+                    { 50, "orange"},
+                    {999, "green" },
+                },
+                listen = true,
+                timeout = 10,
+                widget_text = "${AC_BAT}${color_on}${percent}%${color_off}",
+                widget_font = "Deja Vu Sans Mono 9",
+                tooltip_text = "Battery ${state}${time_est}\nCapacity: ${capacity_percent}%",
+                alert_threshold = 5,
+                alert_timeout = 0,
+                alert_title = "Low battery !",
+                alert_text = "${AC_BAT}${time_est}",
+                warn_full_battery = true,
+            },
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
@@ -255,17 +287,9 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     -- Function Row
-    awful.key({ }, "F1", function ()
-        awful.util.spawn("amixer set Master toggle") end,
-        { description = "toggle volume", group = "function row" }),
-
-    awful.key({ }, "F2", function ()
-        awful.util.spawn("amixer set Master 5%-") end,
-        { description = "lower volume", group = "function row" }),
-
-    awful.key({ }, "F3", function ()
-        awful.util.spawn("amixer set Master 5%+") end,
-        { description = "increase volume", group = "function row" }),
+    awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
+    awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
+    awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
 
     awful.key({ }, "F11", function ()
         awful.util.spawn("xbacklight -dec 15") end,
@@ -614,3 +638,4 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
