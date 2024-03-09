@@ -252,9 +252,9 @@ awful.screen.connect_for_each_screen(function(s)
                 ac_prefix = "AC: ",
                 battery_prefix = "Bat: ",
                 percent_colors = {
-                    { 25, "red"   },
-                    { 50, "orange"},
-                    {999, "green" },
+                    { 25,  "red" },
+                    { 50,  "orange" },
+                    { 999, "green" },
                 },
                 listen = true,
                 timeout = 10,
@@ -286,19 +286,20 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    -- Function Row
+-- Function Row
     awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
     awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
-    awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
+    awful.key({}, "XF86AudioMute", function() volumecfg:toggle() end),
 
-    awful.key({ }, "F11", function ()
-        awful.util.spawn("xbacklight -dec 15") end,
+    awful.key({}, "F11", function()
+            awful.util.spawn("xbacklight -dec 15")
+        end,
         { description = "lower brightness", group = "function row" }),
 
-    awful.key({ }, "F12", function ()
-        awful.util.spawn("xbacklight -inc 15") end,
+    awful.key({}, "F12", function()
+            awful.util.spawn("xbacklight -inc 15")
+        end,
         { description = "lower brightness", group = "function row" }),
-
     awful.key({ modkey, }, "s", hotkeys_popup.show_help,
         { description = "show help", group = "awesome" }),
     awful.key({ modkey, }, "Left", awful.tag.viewprev,
@@ -638,4 +639,3 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-
