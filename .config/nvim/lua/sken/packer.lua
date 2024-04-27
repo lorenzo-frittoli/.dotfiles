@@ -51,11 +51,14 @@ return require('packer').startup(function(use)
             -- {'williamboman/mason-lspconfig.nvim'},
 
             -- LSP Support
-            {'neovim/nvim-lspconfig'},
+            { 'neovim/nvim-lspconfig' },
             -- Autocompletion
-            {'hrsh7th/nvim-cmp'},
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'L3MON4D3/LuaSnip'},
+            { 'hrsh7th/nvim-cmp' },
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'L3MON4D3/LuaSnip' },
         }
     }
+    use 'mfussenegger/nvim-dap'
+    use 'mfussenegger/nvim-dap-python'
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }
 end)
