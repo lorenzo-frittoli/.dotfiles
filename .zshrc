@@ -122,6 +122,10 @@ alias lt="exa -lhga -T -L 2"
 alias apt="nala"
 alias cd="z"
 alias nvim="snap run nvim"
+alias syslogout="sudo service gdm restart"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.dotfiles/.p10k.zsh.
+[[ ! -f ~/.dotfiles/.p10k.zsh ]] || source ~/.dotfiles/.p10k.zsh

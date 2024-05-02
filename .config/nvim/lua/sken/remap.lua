@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 
 -- Ctrl + Backspace to delete word
-vim.api.nvim_set_keymap('i', '<C-H>', '<C-W>', { noremap = true })
+vim.keymap.set("i", "<C-h>", "<C-w>", { noremap = true })
 
 -- Project View
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)

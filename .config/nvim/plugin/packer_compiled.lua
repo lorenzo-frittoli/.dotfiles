@@ -164,6 +164,11 @@ _G.packer_plugins = {
     path = "/home/sken/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["obsidian.nvim"] = {
+    loaded = true,
+    path = "/home/sken/.local/share/nvim/site/pack/packer/start/obsidian.nvim",
+    url = "https://github.com/epwalsh/obsidian.nvim"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/sken/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -183,6 +188,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/sken/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["transparent.nvim"] = {
+    loaded = true,
+    path = "/home/sken/.local/share/nvim/site/pack/packer/start/transparent.nvim",
+    url = "https://github.com/xiyaowong/transparent.nvim"
   },
   undotree = {
     loaded = true,

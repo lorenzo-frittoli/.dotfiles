@@ -61,4 +61,15 @@ return require('packer').startup(function(use)
     use 'mfussenegger/nvim-dap'
     use 'mfussenegger/nvim-dap-python'
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }
+    use({
+        "epwalsh/obsidian.nvim",
+        tag = "*", -- recommended, use latest release instead of latest commit
+        requires = {
+            -- Required.
+            "nvim-lua/plenary.nvim",
+
+            -- see below for full list of optional dependencies 👇
+        },
+    })
+    use "xiyaowong/transparent.nvim"
 end)
