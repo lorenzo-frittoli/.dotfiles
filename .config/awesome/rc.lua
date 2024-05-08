@@ -345,9 +345,8 @@ globalkeys = mytable.join(
     awful.key({ secondary_modkey, "Control" }, "+", function() lain.util.useless_gaps_resize(1) end,
         { description = "increment useless gaps", group = "tag" }),
     awful.key({ secondary_modkey, "Control" }, "-", function() lain.util.useless_gaps_resize(-1) end,
-        { description = "decrement useless gaps", group = "tag"
-    ]] --
-
+        { description = "decrement useless gaps", group = "tag" }),
+        ]] --
 
     -- Standard program
     awful.key({ primary_modkey, }, "Return", function() awful.spawn(terminal) end,
@@ -493,8 +492,12 @@ globalkeys = mytable.join(
 )
 
 clientkeys = mytable.join(
-    awful.key({ primary_modkey }, "m", lain.util.magnify_client,
-        { description = "magnify client", group = "client" }),
+    awful.key({ primary_modkey, }, "m",
+        function(c)
+            c.maximized = not c.maximized
+            c:raise()
+        end,
+        { description = "(un)maximize", group = "client" }),
     awful.key({ primary_modkey, }, "f",
         function(c)
             c.fullscreen = not c.fullscreen
