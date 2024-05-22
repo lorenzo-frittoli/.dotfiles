@@ -43,3 +43,26 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- Format
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+
+-- Markdown and txt file config
+--[[
+local function is_target_filetype()
+    return (vim.bo.filetype == "markdown" or vim.bo.filetype == "txt")
+end
+local function set_keymaps()
+    vim.keymap.set({ "n", "i" }, "<C-b>", function()
+        local word = vim.fn.expand("<cword>")
+        print(word)
+    end)
+end
+vim.api.nvim_create_autocmd("FileType", {
+    desc = "Custom keymaps for markdown and txt",
+    pattern = { "markdown", "txt" },
+    callback = function()
+        if is_target_filetype() then
+            set_keymaps()
+        end
+    end,
+})
+]]
+--

@@ -96,7 +96,7 @@ require("obsidian").setup({
                 suffix = suffix .. string.char(math.random(65, 90))
             end
         end
-        return tostring(os.time()) .. "-" .. suffix
+        return tostring(os.date("%Y-%m-%d")) .. "-" .. suffix
     end,
 
     -- Optional, customize how note file names are generated given the ID, target directory, and title.
