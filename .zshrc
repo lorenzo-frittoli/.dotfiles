@@ -10,6 +10,8 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+# Neovim
+export PATH="$PATH:/opt/nvim-linux64/bin"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -122,7 +124,6 @@ alias lt="exa -lhga -T -L 2"
 
 alias apt="nala"
 alias cd="z"
-alias nvim="snap run nvim"
 alias syslogout="sudo service gdm restart"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

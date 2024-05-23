@@ -21,7 +21,11 @@ return require('packer').startup(function(use)
     use {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        "neovim/nvim-lspconfig",
+    }
+    use { "neovim/nvim-lspconfig",
+        opts = {
+            inlay_hints = { enabled = true }
+        }
     }
     use 'm4xshen/autoclose.nvim'
     use {

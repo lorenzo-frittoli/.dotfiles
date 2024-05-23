@@ -44,6 +44,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 -- Format
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
+vim.keymap.set("n", "<leader>eh", vim.lsp.inlay_hint.enable)
 -- Markdown and txt file config
 --[[
 local function is_target_filetype()
