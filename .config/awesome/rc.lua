@@ -281,12 +281,12 @@ globalkeys = mytable.join(
 
     -- Take a screenshot
     awful.key({ secondary_modkey }, "p",
-        function() awful.spawn("maim | xclip -selection clipboard -t image/png") end,
+        function() os.execute("maim -u | xclip -selection clipboard -t image/png") end,
         { description = "screenshot to clipboard", group = "hotkeys" }),
 
     -- Take a screenshot with selection
     awful.key({ secondary_modkey, "Shift" }, "p",
-        function() os.execute("maim -s | xclip -selection clipboard -t image/png") end,
+        function() os.execute("maim -s -o -u -B | xclip -selection clipboard -t image/png") end,
         { description = "screenshot selection to clipboard", group = "hotkeys" }),
 
     -- Default client focus
