@@ -2,7 +2,7 @@
 size = 11.0
 
 [font.normal]
-family = "MesloLGS NF"
+family = "JetBrainsMonoNerdFont"
 
 [keyboard]
 bindings = [
@@ -11,6 +11,8 @@ bindings = [
 
 [window]
 opacity = 0.8
+padding.x = 5
+padding.y = 5
 
 [colors.primary]
 background = '#212332'
@@ -21,12 +23,12 @@ text =   '#7f85a3'
 cursor = '#d0d0d0'
 
 [colors.normal]
-black =   '#444a73'
+black =   '#24273c'
 red =     '#ff5370'
 green =   '#4fd6be'
 yellow =  '#ffc777'
 blue =    '#78A4FF'
-magenta = '#fc7b7b'
+magenta = '#b353fd'
 cyan =    '#86e1fc'
 white =   '#d0d0d0'
 
@@ -36,6 +38,6 @@ red =     '#ff98a4'
 green =   '#c3e88d'
 yellow =  '#ffc777'
 blue =    '#93B6FF'
-magenta = '#ff966c'
+magenta = '#fd75fd'
 cyan =    '#b4f9f8'
-white =   '#5f8787'
+white =   '#e2fdfc'

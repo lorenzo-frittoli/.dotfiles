@@ -116,15 +116,17 @@ eval "$(zoxide init zsh)" # Config zoxide
 
 # Aliases
 alias sudo='sudo ' # Allow for aliases to work with sudo
+alias sudousr='f() {sudo $(which $1)};f'
 
 alias ls="exa"
-alias ll="exa -lhg"
-alias la="exa -lhga"
-alias lt="exa -lhga -T -L 2"
+alias ll="exa -lhg --git --icons"
+alias la="exa -lhga --git --icons"
+alias lt="exa -lhga -T -L 2 --git --icons"
 
 alias apt="nala"
 alias cd="z"
 alias syslogout="sudo service gdm restart"
+alias getpx="maim -st 0 -o | convert - -resize 1x1\! -format '%[pixel:p{0,0}]' info:-"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

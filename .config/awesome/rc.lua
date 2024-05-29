@@ -18,7 +18,6 @@ local wibox         = require("wibox")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local lain          = require("lain")
-local menubar       = require("menubar")
 local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
@@ -84,8 +83,6 @@ awful.spawn.with_shell(
 
 -- {{{ Variable definitions
 
-local shape                            = function(cr, w, h) gears.shape.rounded_rect(cr, w, h, 5) end
-
 local themes                           = {
     "blackburn",       -- 1
     "copland",         -- 2
@@ -110,15 +107,15 @@ local editor                           = os.getenv("EDITOR") or "nvim"
 local browser                          = "brave-browser"
 
 awful.util.terminal                    = terminal
-awful.util.tagnames                    = { "  ", " ", " ", "4 ", "5 ", "6 ", "7 ", "8 ", "9" }
+awful.util.tagnames                    = { "  ", "  ", "  ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 ", " 󰎆 " }
 awful.layout.layouts                   = {
     awful.layout.suit.tile,
-    awful.layout.suit.floating,
+    --awful.layout.suit.floating,
     --awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
-    --awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
+    --awful.layout.suit.fair.right,
+    awful.layout.suit.fair,
     --awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
     --awful.layout.suit.max,
@@ -242,13 +239,15 @@ end)
 screen.connect_signal("arrange", function(s)
     local only_one = #s.tiled_clients == 1
     for _, c in pairs(s.clients) do
-        if only_one and not c.floating or c.maximized or c.fullscreen then
+        --if only_one and not c.floating or c.maximized or c.fullscreen then
+        if c.maximized or c.fullscreen then
             c.border_width = 0
         else
             c.border_width = beautiful.border_width
         end
     end
 end)
+--
 
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
@@ -333,6 +332,7 @@ globalkeys = mytable.join(
     awful.key({ primary_modkey }, "b", function()
             for s in screen do
                 s.mywibox.visible = not s.mywibox.visible
+                s.mypaddingwibox.visible = not s.mypaddingwibox.visible
                 if s.mybottomwibox then
                     s.mybottomwibox.visible = not s.mybottomwibox.visible
                 end
@@ -456,7 +456,7 @@ globalkeys = mytable.join(
     ]] --
 
     -- Default
-    awful.key({ primary_modkey }, "p", function() menubar.show() end,
+    awful.key({ primary_modkey }, "p", function() theme.menubar.show() end,
         { description = "show the menubar", group = "launcher" }),
     --[[ dmenu
     awful.key({ modkey }, "x", function ()
@@ -515,10 +515,11 @@ clientkeys = mytable.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
+for i = 1, 10 do
+    local key = "#" .. i + 9
     globalkeys = mytable.join(globalkeys,
         -- View tag only.
-        awful.key({ primary_modkey }, "#" .. i + 9,
+        awful.key({ primary_modkey }, key,
             function()
                 local screen = awful.screen.focused()
                 local tag = screen.tags[i]
@@ -528,7 +529,7 @@ for i = 1, 9 do
             end,
             { description = "view tag #" .. i, group = "tag" }),
         -- Toggle tag display.
-        awful.key({ primary_modkey, "Control" }, "#" .. i + 9,
+        awful.key({ primary_modkey, "Control" }, key,
             function()
                 local screen = awful.screen.focused()
                 local tag = screen.tags[i]
@@ -538,7 +539,7 @@ for i = 1, 9 do
             end,
             { description = "toggle tag #" .. i, group = "tag" }),
         -- Move client to tag.
-        awful.key({ primary_modkey, "Shift" }, "#" .. i + 9,
+        awful.key({ primary_modkey, "Shift" }, key,
             function()
                 if client.focus then
                     local tag = client.focus.screen.tags[i]
@@ -549,7 +550,7 @@ for i = 1, 9 do
             end,
             { description = "move focused client to tag #" .. i, group = "tag" }),
         -- Toggle tag on focused client.
-        awful.key({ primary_modkey, "Control", "Shift" }, "#" .. i + 9,
+        awful.key({ primary_modkey, "Control", "Shift" }, key,
             function()
                 if client.focus then
                     local tag = client.focus.screen.tags[i]

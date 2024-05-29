@@ -10,6 +10,7 @@ local lain                                      = require("lain")
 local awful                                     = require("awful")
 local wibox                                     = require("wibox")
 local dpi                                       = require("beautiful.xresources").apply_dpi
+local menubar                                   = require("menubar")
 
 local awesome, client, os                       = awesome, client, os
 local my_table                                  = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -17,19 +18,20 @@ local my_table                                  = awful.util.table or gears.tabl
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/copland"
 theme.wallpaper                                 = theme.dir .. "/wall.png"
-theme.font                                      = "Terminus 10.5"
-theme.fg_normal                                 = "#BBBBBB"
-theme.fg_focus                                  = "#78A4FF"
-theme.bg_normal                                 = "#111111"
-theme.bg_focus                                  = "#111111"
+theme.font                                      = "JetBrainsMonoNerdFont 10.5"
+theme.fg_normal                                 = "#78A4FF"
+theme.fg_focus                                  = "#93B6FF"
+theme.bg_normal                                 = "#24273c"
+theme.bg_focus                                  = "#24273c"
 theme.fg_urgent                                 = "#000000"
 theme.bg_urgent                                 = "#FFFFFF"
-theme.border_width                              = dpi(0)
-theme.border_normal                             = "#141414"
-theme.border_focus                              = "#93B6FF"
-theme.taglist_fg_focus                          = "#FFFFFF"
-theme.taglist_bg_focus                          = "#111111"
-theme.taglist_bg_normal                         = "#111111"
+theme.border_width                              = dpi(2)
+theme.wibar_border_width                        = dpi(1)
+theme.border_normal                             = "#78A4FF"
+theme.border_focus                              = "#78A4FF"
+theme.taglist_fg_focus                          = "#E2FDFC"
+theme.taglist_bg_focus                          = "#24273c"
+theme.taglist_bg_normal                         = "#24273c"
 theme.titlebar_bg_normal                        = "#191919"
 theme.titlebar_bg_focus                         = "#262626"
 theme.menu_height                               = dpi(16)
@@ -84,11 +86,23 @@ theme.titlebar_maximized_button_focus_active    = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
+theme.menubar                                   = menubar
 
 -- lain related
 theme.layout_centerfair                         = theme.dir .. "/icons/centerfair.png"
 theme.layout_termfair                           = theme.dir .. "/icons/termfair.png"
 theme.layout_centerwork                         = theme.dir .. "/icons/centerwork.png"
+
+-- menubar
+menubar.geometry                                = {
+    x = 0,
+    y = 0,
+    height = dpi(24),
+    width = dpi(1400)
+    --width = s.workarea.width - 4 * theme.useless_gap,
+}
+menubar.border_width                            = theme.wibar_border_width
+menubar.border_color                            = theme.border_normal
 
 local markup                                    = lain.util.markup
 local blue                                      = theme.fg_focus
@@ -329,7 +343,7 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Top padding
-    _ = awful.wibar({
+    s.mypaddingwibox = awful.wibar({
         position = "top",
         screen = s,
         height = 2 * theme.useless_gap,
@@ -342,6 +356,8 @@ function theme.at_screen_connect(s)
         screen = s,
         height = dpi(24),
         width = s.workarea.width - 4 * theme.useless_gap,
+        border_width = theme.wibar_border_width,
+        border_color = theme.border_normal,
         bg = theme.bg_normal,
         fg =
             theme.fg_normal
