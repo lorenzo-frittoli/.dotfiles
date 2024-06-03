@@ -17,7 +17,7 @@ local my_table                                  = awful.util.table or gears.tabl
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/copland"
-theme.wallpaper                                 = theme.dir .. "/wall.png"
+theme.wallpaper                                 = theme.dir .. "/tempwall.jpg"
 theme.font                                      = "JetBrainsMonoNerdFont 10.5"
 theme.fg_normal                                 = "#78A4FF"
 theme.fg_focus                                  = "#93B6FF"
